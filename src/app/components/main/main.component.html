@@ -1,0 +1,39 @@
+<section class="timer-panel">
+  <header>
+    <p class="eyebrow">LIVESPLIT · CLIENTE LOCAL</p>
+    <h1>{{ runs.run()?.game || 'Celeste' }}</h1>
+    <p class="category">{{ runs.run()?.category || 'All Chapters' }}</p>
+  </header>
+  <div class="connection" role="status">
+    <span class="dot" [class.online]="ws.status() === 'connected'"></span>
+    <span>{{ statuses[ws.status()] }}</span>
+    <button type="button" (click)="ws.connect()">Reconectar</button>
+  </div>
+  <div class="run-actions">
+    <button class="reset-button" type="button" (click)="ws.reset()"
+      [disabled]="ws.status() !== 'connected'">↺ RESET RUN</button>
+  </div>
+  @if (ws.error()) { <p class="notice" role="status">{{ ws.error() }}</p> }
+  @if (ws.compatibility()) { <p class="notice" role="status">{{ ws.compatibility() }}</p> }
+  @if (runs.storageError()) { <p class="notice" role="status">{{ runs.storageError() }}</p> }
+  <div class="run-info">
+    <span>{{ phases[runs.phase()] }}</span>
+    <span>{{ runs.run()?.timingMethod === 'GameTime' ? 'Tiempo de juego' : runs.run()?.timingMethod === 'RealTime' ? 'Tiempo real' : 'Método de LiveSplit' }}</span>
+  </div>
+  <table aria-label="Tiempos individuales de segmentos">
+    <thead><tr><th scope="col">Segmento</th><th scope="col">Tiempo</th></tr></thead>
+    <tbody>
+      @for (row of runs.rows(); track $index) {
+        <tr [class.active]="row.status === 'active'" [class.completed]="row.status === 'completed'"
+          [attr.aria-current]="row.status === 'active' ? 'step' : null">
+          <th scope="row"><span class="segment-number">{{ $index + 1 }}</span>{{ row.name }}</th>
+          <td>{{ formatTime(row.timeMs) }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  <footer>
+    <span>Tiempo individual por segmento</span>
+    <span>{{ runs.history().length }} intentos locales</span>
+  </footer>
+</section>

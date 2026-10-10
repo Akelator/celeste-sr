@@ -1,0 +1,63 @@
+{
+  "name": "celeste-cr",
+  "version": "0.0.0",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve -o",
+    "build": "ng build",
+    "build:web": "ng build --configuration production --base-href ./",
+    "electron:start": "electron .",
+    "electron:start:web": "cross-env ELECTRON_START_URL=http://localhost:4200 electron .",
+    "dist:win": "npm run build:web && electron-builder --win nsis",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "private": true,
+  "packageManager": "npm@11.11.0",
+  "dependencies": {
+    "@angular/common": "21.2.0",
+    "@angular/compiler": "21.2.0",
+    "@angular/core": "21.2.0",
+    "@angular/forms": "21.2.0",
+    "@angular/platform-browser": "21.2.0",
+    "@angular/router": "21.2.0",
+    "rxjs": "7.8.0",
+    "tslib": "2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "21.2.11",
+    "@angular/cli": "21.2.11",
+    "@angular/compiler-cli": "21.2.0",
+    "cross-env": "7.0.3",
+    "electron": "37.2.6",
+    "electron-builder": "26.0.12",
+    "jsdom": "28.0.0",
+    "prettier": "3.8.1",
+    "typescript": "5.9.2",
+    "vitest": "4.0.8"
+  },
+  "build": {
+    "appId": "com.celeste.splits",
+    "productName": "Celeste Splits",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/celeste-cr/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  }
+}
