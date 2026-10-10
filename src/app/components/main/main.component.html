@@ -1,39 +1,75 @@
 <section class="timer-panel">
-  <header>
-    <p class="eyebrow">LIVESPLIT · CLIENTE LOCAL</p>
-    <h1>{{ runs.run()?.game || 'Celeste' }}</h1>
-    <p class="category">{{ runs.run()?.category || 'All Chapters' }}</p>
-  </header>
-  <div class="connection" role="status">
-    <span class="dot" [class.online]="ws.status() === 'connected'"></span>
-    <span>{{ statuses[ws.status()] }}</span>
-    <button type="button" (click)="ws.connect()">Reconectar</button>
-  </div>
-  <div class="run-actions">
-    <button class="reset-button" type="button" (click)="ws.reset()"
-      [disabled]="ws.status() !== 'connected'">↺ RESET RUN</button>
-  </div>
-  @if (ws.error()) { <p class="notice" role="status">{{ ws.error() }}</p> }
-  @if (ws.compatibility()) { <p class="notice" role="status">{{ ws.compatibility() }}</p> }
-  @if (runs.storageError()) { <p class="notice" role="status">{{ runs.storageError() }}</p> }
-  <div class="run-info">
-    <span>{{ phases[runs.phase()] }}</span>
-    <span>{{ runs.run()?.timingMethod === 'GameTime' ? 'Tiempo de juego' : runs.run()?.timingMethod === 'RealTime' ? 'Tiempo real' : 'Método de LiveSplit' }}</span>
-  </div>
-  <table aria-label="Tiempos individuales de segmentos">
-    <thead><tr><th scope="col">Segmento</th><th scope="col">Tiempo</th></tr></thead>
-    <tbody>
-      @for (row of runs.rows(); track $index) {
-        <tr [class.active]="row.status === 'active'" [class.completed]="row.status === 'completed'"
-          [attr.aria-current]="row.status === 'active' ? 'step' : null">
-          <th scope="row"><span class="segment-number">{{ $index + 1 }}</span>{{ row.name }}</th>
-          <td>{{ formatTime(row.timeMs) }}</td>
+  <div class="table-scroll">
+    <table aria-label="Tiempos individuales, acumulados y mejores tiempos de segmentos">
+      <!-- <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col" class="best-time">PB</th>
+          <th scope="col" class="cent">Delta</th>
+          <th scope="col" class="right current-time-h">Current</th>
         </tr>
-      }
-    </tbody>
-  </table>
-  <footer>
-    <span>Tiempo individual por segmento</span>
-    <span>{{ runs.history().length }} intentos locales</span>
-  </footer>
+      </thead> -->
+      <tbody>
+        @for (row of runs.rows(); track $index) {
+          <tr [class.active]="segmentActive(row)" [ngClass]="rowColor(row)">
+            <th scope="row" class="segment-icon-cell">
+              <img
+                class="segment-icon"
+                [src]="segmentIcons[$index]"
+                [alt]="row.name"
+                [title]="row.name"
+                width="40"
+                height="40"
+              />
+            </th>
+
+            <td class="best-time">
+              @if (!!row.runDelta && (row.status === 'active' || row.status === 'completed')) {
+                <div class="t-c">
+                  <app-time
+                    [time]="row.runDelta"
+                    [sign]="true"
+                    [ngClass]="aheadOrBehind(row.runDelta)"
+                  ></app-time>
+                  <app-time
+                    [time]="row.segmentDelta"
+                    [sign]="true"
+                    [size]="-15"
+                    [ngClass]="aheadOrBehind(row.segmentDelta)"
+                  ></app-time>
+                </div>
+              } @else {
+                <div class="t-c">
+                  <app-time [time]="row.bestrunTime"></app-time>
+                  <app-time [time]="row.bestSegmentTimeMs" [size]="-15"></app-time>
+                </div>
+              }
+            </td>
+
+            <td class="current-time right">
+              <div class="t-c">
+                <app-time
+                  [time]="row.runTime"
+                  [ngClass]="aheadOrBehindCompleted(row.runDelta, row.status)"
+                ></app-time>
+                <app-time
+                  [time]="row.timeMs"
+                  [ngClass]="aheadOrBehindCompleted(row.segmentDelta, row.status)"
+                  [size]="-15"
+                ></app-time>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="run-total"
+    aria-label="Tiempo acumulado de la run"
+    [class.red]="!!bestTotal && !!total && total > bestTotal"
+  >
+    <app-time class="best-time" [time]="bestTotal"></app-time>
+    <app-time [time]="total" [size]="60"></app-time>
+  </div>
 </section>

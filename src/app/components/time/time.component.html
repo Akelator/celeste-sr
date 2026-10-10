@@ -1,0 +1,8 @@
+@if (size < 0) {
+  <span [style.fontSize.px]="-size">{{ time | formatTime: sign : precision }}</span>
+} @else {
+  <span [style.fontSize.px]="size">
+    {{ time | formatTime1: sign
+    }}<span [style.fontSize.px]="size / 2">{{ time | millis: precision }}</span>
+  </span>
+}

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "records": [
+    { "id": "chapter-00-seg", "timeMs": 32130 },
+    { "id": "chapter-00-acc", "timeMs": 32130 },
+    { "id": "chapter-01-seg", "timeMs": 104023 },
+    { "id": "chapter-01-acc", "timeMs": 136153 },
+    { "id": "chapter-02-seg", "timeMs": 200804 },
+    { "id": "chapter-02-acc", "timeMs": 336957 },
+    { "id": "chapter-03-seg", "timeMs": 573308 },
+    { "id": "chapter-03-acc", "timeMs": 910265 },
+    { "id": "chapter-04-seg", "timeMs": 342652 },
+    { "id": "chapter-04-acc", "timeMs": 1252917 },
+    { "id": "chapter-05-seg", "timeMs": 599335 },
+    { "id": "chapter-05-acc", "timeMs": 1852252 },
+    { "id": "chapter-06-seg", "timeMs": 762841 },
+    { "id": "chapter-06-acc", "timeMs": 2615093 },
+    { "id": "chapter-07-seg", "timeMs": 938706 },
+    { "id": "chapter-07-acc", "timeMs": 3553799 },
+    { "id": "run-total", "timeMs": 3553799 }
+  ]
+}

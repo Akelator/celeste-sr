@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy, signal } from '@angular/core';
 import { Subject } from 'rxjs';
+import { LIVESPLIT_POLL_INTERVAL_MS } from '../app.constants';
 import { CELESTE_SEGMENTS, LiveSplitSnapshot, parseTime, TimerPhase, TimingMethod } from './run.model';
 
 @Injectable({ providedIn: 'root' })
@@ -24,7 +25,7 @@ export class LiveSplitWsService implements OnDestroy {
   private previousAttempt: number | null = null;
   private resetRevision = 0;
 
-  reset(): void {
+  reset(clearCurrentRun = true): void {
     if (!this.socket || this.socket.readyState !== WebSocket.OPEN) return;
     this.socket.send('reset');
     // Discard any snapshot that was being read before the manual reset.
@@ -32,7 +33,7 @@ export class LiveSplitWsService implements OnDestroy {
     this.previousPhase = 'NotRunning';
     this.previousGameTimeMs = null;
     this.previousAttempt = null;
-    this.resets.next();
+    if (clearCurrentRun) this.resets.next();
   }
 
   connect(endpoint = this.endpoint): void {
@@ -172,6 +173,12 @@ export class LiveSplitWsService implements OnDestroy {
           this.previousPhase = phase;
           this.snapshots.next({ phase, splitIndex, attempt, timingMethod, currentTimeMs, lastSplitTimeMs,
             offsetMs, names: [...this.names], game, category });
+          if (phase === 'Ended') {
+            // Ended exposes the frozen final split, not the new file's clock.
+            // Publish/save the result first, then arm LiveSplit for the next
+            // autosplitter start while keeping the completed run in our UI.
+            this.reset(false);
+          }
         }
       }
     } catch (error) {
@@ -184,7 +191,7 @@ export class LiveSplitWsService implements OnDestroy {
       socket.close();
       return;
     }
-    if (this.socket === socket && !this.stopped) this.pollTimer = setTimeout(() => void this.poll(socket), 100);
+    if (this.socket === socket && !this.stopped) this.pollTimer = setTimeout(() => void this.poll(socket), LIVESPLIT_POLL_INTERVAL_MS);
   }
 
   ngOnDestroy(): void { this.disconnect(); this.snapshots.complete(); this.resets.complete(); }
