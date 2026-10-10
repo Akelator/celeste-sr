@@ -3,16 +3,19 @@ const path = require('node:path');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 640,
-    height: 420,
-    minWidth: 360,
-    minHeight: 240,
+    width: 1100,
+    minWidth: 1100,
+    maxWidth: 1100,
+    height: 264,
+    minHeight: 264,
+    maxHeight: 264,
     title: 'Gamepad Inputs',
     autoHideMenuBar: true,
     backgroundColor: '#101521',
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
+      backgroundThrottling: false,
     },
   });
 

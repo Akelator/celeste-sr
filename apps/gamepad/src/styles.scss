@@ -1,11 +1,57 @@
-html, body {
-  margin: 0;
-  min-height: 100%;
-  background: #101521;
-  color: #eef3ff;
-  font-family: 'Segoe UI', sans-serif;
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../public/assets/fonts/JetBrainsMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-*, *::before, *::after {
+:root {
+  --w: 100vw;
+  --h: 100vh;
+  --w: 1080px;
+  --h: 225px;
+  --btn-color: #555;
+}
+
+body {
+  width: var(--w);
+  max-width: var(--w);
+  min-width: var(--w);
+  height: var(--h);
+  min-height: var(--h);
+  max-height: var(--h);
+  overflow: hidden;
+}
+
+html,
+body {
+  background: black;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  font-weight: 700;
+}
+
+*,
+*::before,
+*::after {
+  font-family: inherit;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+
+  * {
+    box-sizing: inherit;
+  }
 }

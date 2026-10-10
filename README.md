@@ -10,7 +10,7 @@ apps/
     electron/
     electron-builder.cjs
     package.json
-  gamepad/           # Hello world; sin lectura de inputs todavía
+  gamepad/           # Visualizador de inputs mediante Gamepad API
     src/
     public/
     electron/
@@ -35,6 +35,12 @@ Cada app también tiene sus propios scripts `start`, `electron:start`, `electron
 Los builds web se generan en `apps/<app>/dist`; los instaladores en `release/celeste-splits` y `release/gamepad`. Cada instalador tiene su propia identidad y empaqueta solo su app. Se mantiene el nombre interno `celeste-cr` en Celeste para conservar la identidad de la aplicación existente.
 
 Los scripts de la raíz identifican explícitamente la app; se han eliminado los alias antiguos y redundantes. Los scripts `build:celeste` y `build:gamepad` se conservan porque los instaladores necesitan generar primero el frontend Angular. El código, los PNG y el aspecto de Celeste se han trasladado a su carpeta sin cambios de funcionalidad.
+
+## Gamepad Inputs
+
+`GamepadService` consulta `navigator.getGamepads()` cada `GAMEPAD_POLL_INTERVAL_MS` (16 ms) y expone signals con los botones, la presión de los gatillos y los ejes de los sticks. Detecta conexiones y desconexiones, y permite elegir mando cuando hay varios. Los nombres Xbox se aplican al mapeo estándar; otros mandos muestran índices genéricos.
+
+La UI resalta los botones pulsados, muestra barras para los gatillos y la posición de ambos sticks. Para la detección inicial, enfoca la ventana y pulsa un botón o mueve un stick. Electron tiene `backgroundThrottling: false` y el servicio usa un temporizador para seguir consultando sin depender de `requestAnimationFrame`.
 
 ## Celeste Splits
 

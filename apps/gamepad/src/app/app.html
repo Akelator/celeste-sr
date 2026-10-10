@@ -1,0 +1,139 @@
+<app-cross-input
+  [upPressed]="upPressed"
+  [rightPressed]="rightPressed"
+  [downPressed]="downPressed"
+  [leftPressed]="leftPressed"
+></app-cross-input>
+<div class="btns">
+  <div class="btn blue" [class.pressed]="xPressed">
+    <div class="btn-label">X</div>
+    <span>DEMO</span>
+  </div>
+  <div class="btn yellow" [class.pressed]="yPressed">
+    <div class="btn-label">Y</div>
+    <span>JUMP</span>
+  </div>
+  <div class="btn green" [class.pressed]="aPressed">
+    <div class="btn-label">A</div>
+    <span>JUMP</span>
+  </div>
+
+  <div class="btn red" [class.pressed]="bPressed">
+    <div class="btn-label">B</div>
+    <span>DASH</span>
+  </div>
+</div>
+<div class="other-btns">
+  <div class="btn pause" [class.pressed]="startPressed">PAUSE</div>
+  <div class="btn climb" [class.pressed]="rightStickPressed">CLIMB</div>
+</div>
+
+<!-- <main>
+  <header>
+    <h1>Gamepad Inputs</h1>
+    <span class="connection" [class.connected]="gamepads.controller()" role="status">
+      {{ gamepads.controller() ? 'Conectado' : 'Sin mando' }}
+    </span>
+  </header>
+
+  @if (gamepads.error()) {
+    <p class="notice" role="status">{{ gamepads.error() }}</p>
+  }
+
+  @if (gamepads.controller(); as pad) {
+    @if (gamepads.controllers().length > 1) {
+      <label class="controller-picker"
+        >Mando
+        <select [value]="gamepads.selectedIndex()" (change)="selectController($event)">
+          @for (controller of gamepads.controllers(); track controller.index) {
+            <option [value]="controller.index">{{ controller.id }}</option>
+          }
+        </select>
+      </label>
+    }
+    <p class="controller-name">{{ pad.id }}</p>
+    @if (pad.mapping !== 'standard') {
+      <p class="notice">
+        Este mando no tiene mapeo estándar. Se muestran sus botones y ejes por índice.
+      </p>
+    }
+
+    <section aria-label="Botones">
+      <h2>Botones</h2>
+      <div class="buttons">
+        @for (button of gamepads.buttons(); track button.index) {
+          <div
+            class="button"
+            [class.pressed]="button.pressed"
+            [attr.aria-label]="button.name + (button.pressed ? ': pulsado' : ': libre')"
+          >
+            {{ button.name }}
+          </div>
+        }
+      </div>
+    </section>
+
+    @if (gamepads.triggers().length) {
+      <section aria-label="Gatillos">
+        <h2>Gatillos</h2>
+        <div class="triggers">
+          @for (trigger of gamepads.triggers(); track trigger.index) {
+            <div class="trigger">
+              <div class="trigger-label">
+                <span>{{ trigger.name }}</span
+                ><span>{{ trigger.value | percent: '1.0-0' }}</span>
+              </div>
+              <div
+                class="trigger-track"
+                role="meter"
+                [attr.aria-label]="trigger.name"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [attr.aria-valuenow]="trigger.value * 100"
+              >
+                <div class="trigger-fill" [style.width.%]="trigger.value * 100"></div>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    @if (gamepads.sticks().length) {
+      <section aria-label="Sticks analógicos">
+        <h2>Sticks</h2>
+        <div class="sticks">
+          @for (stick of gamepads.sticks(); track stick.name) {
+            <div class="stick">
+              <h3>{{ stick.name }}</h3>
+              <div class="stick-area" aria-hidden="true">
+                <span
+                  class="stick-dot"
+                  [style.left.%]="50 + stick.x * 35"
+                  [style.top.%]="50 + stick.y * 35"
+                ></span>
+              </div>
+              <p class="axis-values">
+                X {{ stick.x | number: '1.2-2' }} · Y {{ stick.y | number: '1.2-2' }}
+              </p>
+            </div>
+          }
+        </div>
+      </section>
+    } @else {
+      <section aria-label="Ejes analógicos">
+        <h2>Ejes</h2>
+        <div class="axes">
+          @for (axis of pad.axes; track $index) {
+            <span>Eje {{ $index }}: {{ axis | number: '1.2-2' }}</span>
+          }
+        </div>
+      </section>
+    }
+  } @else if (!gamepads.error()) {
+    <div class="empty">
+      <h2>Conecta tu mando Xbox</h2>
+      <p>Con esta ventana enfocada, pulsa un botón o mueve un stick para que se detecte.</p>
+    </div>
+  }
+</main> -->

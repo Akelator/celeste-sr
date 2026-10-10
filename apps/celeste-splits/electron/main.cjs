@@ -31,10 +31,12 @@ function createWindow() {
   const win = new BrowserWindow({
     x,
     y,
-    width: 490,
-    minWidth: 490,
-    maxWidth: 490,
-    height: 860,
+    width: 400,
+    minWidth: 400,
+    maxWidth: 400,
+    height: 810,
+    minHeight: 810,
+    maxHeight: 810,
     autoHideMenuBar: true,
     backgroundColor: '#0f1117',
     webPreferences: {

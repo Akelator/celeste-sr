@@ -52,8 +52,8 @@ td {
 
 .segment-icon-cell {
   text-align: center;
-  padding-right: 30px;
-  padding-left: 30px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .segment-icon {
@@ -109,11 +109,13 @@ tr.ambiguous {
 .behind {
   color: #ff8190;
 }
+
 .t-c {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
+
 .run-total {
   display: flex;
   flex-flow: column;
