@@ -19,17 +19,6 @@ export class MainComponent implements OnInit, OnDestroy {
   readonly segmentIcons = ['00', '01', '02', '03', '04', '05', '06', '07'].map(
     (chapter) => `assets/icons/${chapter}.png`,
   );
-  readonly phases = {
-    NotRunning: 'Esperando run',
-    Running: 'En curso',
-    Paused: 'En pausa',
-    Ended: 'Completada',
-  };
-  readonly statuses = {
-    connecting: 'Conectando…',
-    connected: 'Conectado',
-    disconnected: 'Desconectado',
-  };
   ngOnInit(): void {
     this.ws.connect();
   }

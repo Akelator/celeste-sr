@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -10,8 +10,5 @@ import { RouterOutlet } from '@angular/router';
       <router-outlet></router-outlet>
     </main>
   `,
-  styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('celeste-cr');
-}
+export class App {}

@@ -30,7 +30,6 @@ export interface SegmentResult {
   status: 'pending' | 'active' | 'completed' | 'unavailable';
   runTime: number | null;
   segmentTime: number | null;
-  currentTime: number | null;
   runDelta: number | null;
   segmentDelta: number | null;
 }
@@ -59,7 +58,6 @@ export function emptySegments(names = CELESTE_SEGMENTS): SegmentResult[] {
     status: 'pending',
     runTime: null,
     segmentTime: null,
-    currentTime: null,
     runDelta: null,
     segmentDelta: null,
   }));
@@ -81,15 +79,6 @@ export function parseTime(value: string): number | null {
         1000,
     )
   );
-}
-
-export function formatTime(ms: number | null): string {
-  if (ms === null) return '—';
-  const absolute = Math.abs(Math.round(ms));
-  const hours = Math.floor(absolute / 3600000);
-  const minutes = Math.floor(absolute / 60000) % 60;
-  const seconds = Math.floor(absolute / 1000) % 60;
-  return `${ms < 0 ? '-' : ''}${hours ? `${hours}:` : ''}${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(absolute % 1000).padStart(3, '0')}`;
 }
 
 export function belongsToRun(run: RunRecord, state: LiveSplitSnapshot): boolean {

@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
   emptySegments,
-  formatTime,
   LiveSplitSnapshot,
   liveSegmentTime,
   parseTime,
@@ -46,8 +45,6 @@ describe('run timing model', () => {
     expect(parseTime('-')).toBeNull();
     expect(parseTime('garbage')).toBeNull();
     expect(parseTime('00:61:00')).toBeNull();
-    expect(formatTime(3723123)).toBe('1:02:03.123');
-    expect(formatTime(null)).toBe('—');
   });
   it('keeps original cumulative boundaries and derives individual/live times', () => {
     let run = updateRun(

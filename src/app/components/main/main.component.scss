@@ -15,56 +15,6 @@
   overflow: hidden;
 }
 
-header {
-  padding: 28px 28px 20px;
-}
-
-.eyebrow {
-  color: #9baaca;
-  font-size: 11px;
-  letter-spacing: .14em;
-  margin: 0 0 12px;
-}
-
-h1 {
-  font-size: 32px;
-  margin: 0 0 6px;
-}
-
-.category {
-  color: #aebad1;
-  margin: 0;
-}
-
-.connection {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 28px 20px;
-  font-size: 13px;
-  color: #aebad1;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #b59b70;
-}
-
-.dot.online {
-  background: #70dcb9;
-}
-
-.run-info {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 28px;
-  background: #1e2638;
-  font-size: 12px;
-  color: #b6c3dc;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -80,27 +30,10 @@ td {
   text-align: left;
 }
 
-thead th {
-  font-size: 25px;
-  color: #9baaca;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-}
-
 tbody th {
   font-size: 14px;
   font-weight: 500;
 }
-
-td,
-thead th {
-  &.right {
-    text-align: right;
-    padding-right: 30px;
-  }
-}
-
-
 
 td {
   font-family: inherit;
@@ -110,12 +43,17 @@ td {
   width: calc(100% / 2);
   min-width: calc(100% / 2);
   max-width: calc(100% / 2);
+
+  &.right {
+    text-align: right;
+    padding-right: 30px;
+  }
 }
 
 .segment-icon-cell {
   text-align: center;
   padding-right: 30px;
-  padding-left: 30px
+  padding-left: 30px;
 }
 
 .segment-icon {
@@ -164,14 +102,6 @@ tr.ambiguous {
   color: #fff;
 }
 
-.current-time-h {
-  color: #fff !important;
-}
-
-.delta {
-  color: #aebad1;
-}
-
 .ahead {
   color: #70dcb9;
 }
@@ -179,26 +109,11 @@ tr.ambiguous {
 .behind {
   color: #ff8190;
 }
-
-.run-total-best {
-  font-size: 16px;
-  font-family: inherit;
-  font-variant-numeric: tabular-nums;
-}
-
-
-
 .t-c {
   display: flex;
   flex-direction: column;
   gap: 4px;
-
-  .i-2 {
-    font-size: 13px;
-  }
 }
-
-
 .run-total {
   display: flex;
   flex-flow: column;
@@ -211,26 +126,5 @@ tr.ambiguous {
 
   &.red {
     color: #ff8190;
-  }
-}
-
-
-.run-total-time {
-  font-family: inherit;
-  font-variant-numeric: tabular-nums;
-  font-size: 60px;
-  line-height: 1;
-  white-space: nowrap;
-
-  &.best-time {
-    font-size: 40px;
-  }
-}
-
-:host::ng-deep td,
-:host::ng-deepthead th {
-  &.right {
-    text-align: right;
-    padding-right: 30px;
   }
 }

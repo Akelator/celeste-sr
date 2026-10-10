@@ -1,14 +1,6 @@
 <section class="timer-panel">
   <div class="table-scroll">
     <table aria-label="Tiempos individuales, acumulados y mejores tiempos de segmentos">
-      <!-- <thead>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col" class="best-time">PB</th>
-          <th scope="col" class="cent">Delta</th>
-          <th scope="col" class="right current-time-h">Current</th>
-        </tr>
-      </thead> -->
       <tbody>
         @for (row of runs.rows(); track $index) {
           <tr [class.active]="segmentActive(row)" [ngClass]="rowColor(row)">
@@ -22,7 +14,6 @@
                 height="40"
               />
             </th>
-
             <td class="best-time">
               @if (!!row.runDelta && (row.status === 'active' || row.status === 'completed')) {
                 <div class="t-c">
@@ -45,7 +36,6 @@
                 </div>
               }
             </td>
-
             <td class="current-time right">
               <div class="t-c">
                 <app-time
@@ -70,6 +60,6 @@
     [class.red]="!!bestTotal && !!total && total > bestTotal"
   >
     <app-time class="best-time" [time]="bestTotal"></app-time>
-    <app-time [time]="total" [size]="60"></app-time>
+    <app-time [time]="total" [size]="60" (dblclick)="onClear()"></app-time>
   </div>
 </section>
