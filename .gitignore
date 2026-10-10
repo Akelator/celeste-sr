@@ -50,3 +50,7 @@ Thumbs.db
 /.vscode
 .editorconfig
 .prettierrc
+
+
+/LIVESPLIT
+/scripts
