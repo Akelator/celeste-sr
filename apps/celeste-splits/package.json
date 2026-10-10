@@ -1,0 +1,13 @@
+{
+  "name": "celeste-cr",
+  "version": "0.0.0",
+  "description": "Cliente de tiempos de Celeste y LiveSplit",
+  "private": true,
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dist:win": "npm --prefix ../.. run dist:win:celeste",
+    "start": "npm --prefix ../.. run start:celeste",
+    "electron:start": "npm --prefix ../.. run electron:start:celeste",
+    "electron:dev": "npm --prefix ../.. run electron:dev:celeste"
+  }
+}

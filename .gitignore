@@ -2,6 +2,7 @@
 
 # Compiled output
 /dist
+/apps/*/dist
 /tmp
 /out-tsc
 /bazel-out
@@ -45,7 +46,6 @@ Thumbs.db
 
 # My stuff
 /agent
-/electron
 /release
 /.vscode
 .editorconfig

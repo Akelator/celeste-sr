@@ -4,32 +4,34 @@
   "cli": {
     "packageManager": "npm"
   },
-  "newProjectRoot": "projects",
+  "newProjectRoot": "apps",
   "projects": {
-    "celeste-cr": {
+    "celeste-splits": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/celeste-splits",
+      "sourceRoot": "apps/celeste-splits/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "src/main.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "apps/celeste-splits/dist",
+            "index": "apps/celeste-splits/src/index.html",
+            "browser": "apps/celeste-splits/src/main.ts",
+            "tsConfig": "apps/celeste-splits/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "apps/celeste-splits/public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["apps/celeste-splits/src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -59,16 +61,65 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "celeste-cr:build:production"
+              "buildTarget": "celeste-splits:build:production"
             },
             "development": {
-              "buildTarget": "celeste-cr:build:development"
+              "buildTarget": "celeste-splits:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "apps/celeste-splits/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "gamepad": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": { "style": "scss" }
+      },
+      "root": "apps/gamepad",
+      "sourceRoot": "apps/gamepad/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "apps/gamepad/dist",
+            "index": "apps/gamepad/src/index.html",
+            "browser": "apps/gamepad/src/main.ts",
+            "tsConfig": "apps/gamepad/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [{ "glob": "**/*", "input": "apps/gamepad/public" }],
+            "styles": ["apps/gamepad/src/styles.scss"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                { "type": "initial", "maximumWarning": "500kB", "maximumError": "1MB" },
+                { "type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB" }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "gamepad:build:production" },
+            "development": { "buildTarget": "gamepad:build:development" }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }

@@ -1,17 +1,17 @@
 {
   "name": "celeste-cr",
   "version": "0.0.0",
-  "main": "electron/main.cjs",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve -o",
-    "build": "ng build",
-    "build:web": "ng build --configuration production --base-href ./",
-    "electron:start": "electron .",
-    "electron:start:web": "cross-env ELECTRON_START_URL=http://localhost:4200 electron .",
-    "dist:win": "npm run build:web && electron-builder --win nsis",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start:celeste": "ng serve celeste-splits --port 4200 -o",
+    "start:gamepad": "ng serve gamepad --port 4201 -o",
+    "build:celeste": "ng build celeste-splits --configuration production --base-href ./",
+    "build:gamepad": "ng build gamepad --configuration production --base-href ./",
+    "electron:start:celeste": "electron apps/celeste-splits",
+    "electron:start:gamepad": "electron apps/gamepad",
+    "electron:dev:celeste": "cross-env ELECTRON_START_URL=http://localhost:4200 electron apps/celeste-splits",
+    "electron:dev:gamepad": "cross-env ELECTRON_START_URL=http://localhost:4201 electron apps/gamepad",
+    "dist:win:celeste": "npm run build:celeste && electron-builder --config apps/celeste-splits/electron-builder.cjs --win nsis",
+    "dist:win:gamepad": "npm run build:gamepad && electron-builder --config apps/gamepad/electron-builder.cjs --win nsis"
   },
   "private": true,
   "packageManager": "npm@11.11.0",
@@ -36,28 +36,5 @@
     "prettier": "3.8.1",
     "typescript": "5.9.2",
     "vitest": "4.0.8"
-  },
-  "build": {
-    "appId": "com.celeste.splits",
-    "productName": "Celeste Splits",
-    "directories": {
-      "output": "release"
-    },
-    "files": [
-      "dist/celeste-cr/**/*",
-      "electron/**/*",
-      "package.json"
-    ],
-    "win": {
-      "signAndEditExecutable": false,
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        }
-      ]
-    }
   }
 }

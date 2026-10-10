@@ -25,10 +25,13 @@
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.app.json"
+      "path": "./apps/celeste-splits/tsconfig.app.json"
     },
     {
-      "path": "./tsconfig.spec.json"
+      "path": "./apps/celeste-splits/tsconfig.spec.json"
+    },
+    {
+      "path": "./apps/gamepad/tsconfig.app.json"
     }
   ]
 }

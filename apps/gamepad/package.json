@@ -1,0 +1,13 @@
+{
+  "name": "gamepad-inputs",
+  "version": "0.0.0",
+  "description": "Visualizador de inputs de un mando Xbox",
+  "private": true,
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dist:win": "npm --prefix ../.. run dist:win:gamepad",
+    "start": "npm --prefix ../.. run start:gamepad",
+    "electron:start": "npm --prefix ../.. run electron:start:gamepad",
+    "electron:dev": "npm --prefix ../.. run electron:dev:gamepad"
+  }
+}

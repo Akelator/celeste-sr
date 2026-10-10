@@ -1,12 +1,50 @@
-# Celeste Splits
+# Celeste Tools — monorepo
+
+Un único workspace Angular con dependencias compartidas en la raíz y dos aplicaciones independientes:
+
+```text
+apps/
+  celeste-splits/    # Cliente LiveSplit existente
+    src/
+    public/
+    electron/
+    electron-builder.cjs
+    package.json
+  gamepad/           # Hello world; sin lectura de inputs todavía
+    src/
+    public/
+    electron/
+    electron-builder.cjs
+    package.json
+```
+
+Instala las dependencias en la raíz. No hace falta instalar nada dentro de cada app.
+
+| Acción desde la raíz | Celeste | Gamepad |
+| --- | --- | --- |
+| Serve Angular | `npm run start:celeste` | `npm run start:gamepad` |
+| Build Angular | `npm run build:celeste` | `npm run build:gamepad` |
+| Electron con Angular servido | `npm run electron:dev:celeste` | `npm run electron:dev:gamepad` |
+| Electron con el build local | `npm run electron:start:celeste` | `npm run electron:start:gamepad` |
+| Build e instalador de Windows | `npm run dist:win:celeste` | `npm run dist:win:gamepad` |
+
+Para desarrollar, deja el serve abierto y ejecuta Electron en otra terminal. Los puertos son **4200 para Celeste** y **4201 para Gamepad**, por lo que pueden ejecutarse juntas. Para Electron con archivos locales, genera primero el build Angular de esa app.
+
+Cada app también tiene sus propios scripts `start`, `electron:start`, `electron:dev` y `dist:win` en su `package.json`: puedes usarlos desde su carpeta o, por ejemplo, con `npm --prefix apps/gamepad start` desde la raíz.
+
+Los builds web se generan en `apps/<app>/dist`; los instaladores en `release/celeste-splits` y `release/gamepad`. Cada instalador tiene su propia identidad y empaqueta solo su app. Se mantiene el nombre interno `celeste-cr` en Celeste para conservar la identidad de la aplicación existente.
+
+Los scripts de la raíz identifican explícitamente la app; se han eliminado los alias antiguos y redundantes. Los scripts `build:celeste` y `build:gamepad` se conservan porque los instaladores necesitan generar primero el frontend Angular. El código, los PNG y el aspecto de Celeste se han trasladado a su carpeta sin cambios de funcionalidad.
+
+## Celeste Splits
 
 Cliente Angular + Electron para el WebSocket de LiveSplit.
 
 1. En LiveSplit, carga `agent/celeste_minimun-splits-data.lss` y activa el autosplitter de Celeste.
 2. Activa el servidor **WebSocket** de LiveSplit en el puerto **16834**.
-3. Ejecuta `npm start` para la UI web. Para Electron en desarrollo, ejecuta también `npm run electron:start:web` en otra terminal.
-4. Para usar Electron con archivos locales: `npm run build:web` y después `npm run electron:start`.
-5. `npm run dist:win` genera el instalador de Windows; `npm test -- --watch=false` ejecuta las pruebas.
+3. Desde la raíz, ejecuta `npm run start:celeste` para la UI web. Para Electron en desarrollo, ejecuta también `npm run electron:dev:celeste` en otra terminal.
+4. Para usar Electron con archivos locales: `npm run build:celeste` y después `npm run electron:start:celeste`.
+5. `npm run dist:win:celeste` genera el instalador de Windows.
 
 La conexión a `ws://localhost:16834/livesplit` es automática y reintenta tras desconexiones. La tabla muestra los ocho segmentos del ejemplo; al conectar usa los nombres y el número de segmentos de LiveSplit.
 
