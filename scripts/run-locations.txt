@@ -1,0 +1,4 @@
+../LIVESPLIT/LiveSplit.exe
+steam://rungameid/504230
+../release/celeste-splits/win-unpacked/Celeste Splits.exe
+../release/gamepad/win-unpacked/Gamepad Inputs.exe
