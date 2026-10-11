@@ -29,8 +29,8 @@ function createWindow() {
   const { x, y } = targetDisplay.workArea;
 
   const win = new BrowserWindow({
-    x,
-    y,
+    x: 1920,
+    y: 0,
     width: 400,
     minWidth: 400,
     maxWidth: 400,
